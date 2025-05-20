@@ -16,6 +16,8 @@ class School(Base):
     email = Column(String(100))
     logo_url = Column(Text)
     subscription_plan = Column(String(50), default="free")
+    join_code = Column(String(5), unique=True)
+    code_expires_at = Column(DateTime(timezone=True))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     

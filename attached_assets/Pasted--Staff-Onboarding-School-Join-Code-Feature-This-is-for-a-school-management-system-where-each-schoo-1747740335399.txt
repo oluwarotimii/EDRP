@@ -1,0 +1,148 @@
+ Staff Onboarding & School Join Code Feature
+This is for a school management system where each school is a separate workspace, and admins manage staff onboarding via time-limited join codes.
+
+✅ 1. School Registration + Auto-Generated Join Code
+Endpoint: POST /schools
+Purpose: Register a school and create its admin
+
+🔻 Request Body:
+json
+Copy
+Edit
+{
+  "school_name": "Victory High School",
+  "admin": {
+    "name": "Mrs. Tayo",
+    "email": "tayo@victory.edu",
+    "password": "StrongPass123"
+  }
+}
+🛠️ Backend Logic:
+Create a new school record
+
+Generate a unique 5-digit join code (e.g., 72391)
+
+Set code_expires_at = now + 3 days
+
+Create the admin user and link to the school
+
+Return the join code with the school ID
+
+🔑 2. Join a School (for Staff/Teachers Only)
+Endpoint: POST /join-school
+Purpose: Allow teachers or staff to self-register into a school using the school’s join code
+
+🔻 Request Body:
+json
+Copy
+Edit
+{
+  "join_code": "72391",
+  "name": "Mr. Kayode",
+  "email": "kayode@victory.edu",
+  "password": "StrongPassword"
+}
+🛠️ Backend Logic:
+Validate the join code:
+
+Ensure it exists
+
+Ensure it hasn’t expired (code_expires_at > now)
+
+Create the user:
+
+role = staff
+
+status = pending
+
+school_id = matched school
+
+Respond: “Registration successful, pending admin approval.”
+
+✅ 3. Admin Approves or Rejects Pending Users
+Endpoint: GET /users/pending
+Purpose: Allow admin to view users with status = pending in their school
+
+Endpoint: PUT /users/{user_id}/approve
+Request Body:
+
+json
+Copy
+Edit
+{
+  "action": "approve"  // OR "reject"
+}
+🛠️ Logic:
+Admin must belong to the same school_id
+
+Update status field of user:
+
+"active" if approved
+
+"rejected" if denied
+
+🔁 4. Join Code Regeneration
+Endpoint: POST /schools/{school_id}/regenerate-code
+Purpose: Allow admin to manually generate a new join code anytime.
+
+🛠️ Logic:
+Generate new unique 5-digit code
+
+Set new code_expires_at = now + 3 days
+
+Replace previous code
+
+Return new code to admin
+
+🔄 5. Automatic Code Expiry & Replacement
+The join code is only valid for 3 days
+
+After expiration, any attempt to join the school with the code should fail with a message like:
+
+css
+Copy
+Edit
+"Join code expired. Ask the admin to generate a new one."
+Admins can regenerate codes any time, whether or not the previous one expired. The new code replaces the old one and starts a new 3-day validity window.
+
+📘 Database Schema Additions (Example)
+School Table
+
+json
+Copy
+Edit
+{
+  "id": 1,
+  "name": "Victory High",
+  "join_code": "72391",
+  "code_expires_at": "2025-05-25T10:30:00Z"
+}
+User Table
+
+json
+Copy
+Edit
+{
+  "id": 10,
+  "school_id": 1,
+  "name": "Mr. Kayode",
+  "email": "kayode@victory.edu",
+  "role": "staff",
+  "status": "pending"
+}
+🔐 Role & Access Control Summary
+Role	Can register school	Can approve staff	Can join via code
+Admin	✅	✅	❌
+Staff	❌	❌	✅
+Student/Parent	❌	❌	❌ (excluded for now)
+
+💡 Example Use Case Flow
+Admin registers a school → receives join code 72391.
+
+Within 3 days, a teacher joins using that code → status: pending.
+
+Admin views pending list and approves the teacher.
+
+After 3 days, the join code expires.
+
+Admin regenerates a new code (18844) to invite more staff.
