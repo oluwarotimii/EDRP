@@ -1,39 +1,30 @@
 import os
-import re
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 from app.config import settings
 
-# Convert standard PostgreSQL URL to asyncpg format if needed
-db_url = settings.DATABASE_URL
-if not db_url.startswith('postgresql+asyncpg://'):
-    # Replace postgresql:// with postgresql+asyncpg://
-    db_url = re.sub(r'^postgresql:\/\/', 'postgresql+asyncpg://', db_url)
-
-# Create async engine
-engine = create_async_engine(
-    db_url,
+# Using a regular (non-async) engine since we're having issues with asyncpg
+engine = create_engine(
+    settings.DATABASE_URL,
     echo=False,
-    future=True,
     pool_pre_ping=True,
 )
 
 # Create base class for models
 Base = declarative_base()
 
-# Create async session factory
-async_session_factory = sessionmaker(
+# Create session factory
+SessionLocal = sessionmaker(
+    bind=engine,
     autocommit=False,
     autoflush=False,
-    expire_on_commit=False,
-    class_=AsyncSession,
-    bind=engine,
 )
 
 # Dependency to get DB session
-async def get_db():
-    async with async_session_factory() as session:
-        try:
-            yield session
-        finally:
-            await session.close()
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
