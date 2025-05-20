@@ -48,12 +48,12 @@ async def global_exception_handler(request: Request, exc: Exception):
     )
 
 # Create database tables
-@app.on_event("startup")
-async def startup():
-    # Create tables
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    logger.info("Database tables created or verified")
+# @app.on_event("startup")
+# async def startup():
+#     # Create tables
+#     async with engine.begin() as conn:
+#         await conn.run_sync(Base.metadata.create_all)
+#     logger.info("Database tables created or verified")
 
 # Include routers
 app.include_router(auth.router, prefix="/api", tags=["Authentication"])

@@ -1,0 +1,7131 @@
+please turn this to a readme documentation
+School ERP API
+ 1.0.0 
+OAS 3.1
+/api/openapi.json
+API for School ERP system
+
+
+Authorize
+Authentication
+
+
+POST
+/api/auth/register
+Register User
+
+Register a new user.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "full_name": "string",
+  "email": "user@example.com",
+  "phone": "string",
+  "profile_photo_url": "string",
+  "password": "stringst",
+  "school_id": 0,
+  "role_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "full_name": "string",
+  "email": "user@example.com",
+  "phone": "string",
+  "profile_photo_url": "string",
+  "id": 0,
+  "school_id": 0,
+  "role_id": 0,
+  "is_email_verified": true,
+  "created_at": "2025-05-20T12:12:15.627Z",
+  "updated_at": "2025-05-20T12:12:15.627Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/auth/login
+Login For Access Token
+
+Authenticate a user and return an access token.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "email": "user@example.com",
+  "password": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "access_token": "string",
+  "token_type": "string",
+  "user_id": 0,
+  "role": "string"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/auth/change-password
+Change Password
+
+
+Change user password.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "old_password": "string",
+  "new_password": "stringst"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+"string"
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/auth/me
+Get Current User Info
+
+
+Get information about the currently authenticated user.
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "full_name": "string",
+  "email": "user@example.com",
+  "phone": "string",
+  "profile_photo_url": "string",
+  "id": 0,
+  "school_id": 0,
+  "role_id": 0,
+  "is_email_verified": true,
+  "created_at": "2025-05-20T12:12:15.696Z",
+  "updated_at": "2025-05-20T12:12:15.696Z"
+}
+No links
+Onboarding
+
+
+POST
+/api/schools
+Register School
+
+Register a new school and create an admin user with a unique join code.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "school_name": "string",
+  "admin": {
+    "name": "string",
+    "email": "user@example.com",
+    "password": "stringst"
+  }
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "id": 0,
+  "name": "string",
+  "join_code": "string",
+  "code_expires_at": "2025-05-20T12:12:15.713Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/join-school
+Join School
+
+Allow teachers/staff to join a school using a join code.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "join_code": "strin",
+  "name": "string",
+  "email": "user@example.com",
+  "password": "stringst"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "message": "string",
+  "user_id": 0
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/users/pending
+Get Pending Users
+
+
+Get all pending users for the admin's school.
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "id": 0,
+    "full_name": "string",
+    "email": "user@example.com",
+    "status": "string",
+    "created_at": "2025-05-20T12:12:15.746Z"
+  }
+]
+No links
+
+PUT
+/api/users/{user_id}/approve
+Approve Or Reject User
+
+
+Approve or reject a pending user.
+
+Parameters
+Try it out
+Name	Description
+user_id *
+integer
+(path)
+user_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "action": "reject"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "id": 0,
+  "full_name": "string",
+  "email": "user@example.com",
+  "status": "string",
+  "created_at": "2025-05-20T12:12:15.766Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/schools/{school_id}/regenerate-code
+Regenerate Join Code
+
+
+Generate a new join code for a school.
+
+Parameters
+Try it out
+Name	Description
+school_id *
+integer
+(path)
+school_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "join_code": "string",
+  "code_expires_at": "2025-05-20T12:12:15.781Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Schools
+
+
+GET
+/api/schools
+Get Schools
+
+
+Get all schools (admin only).
+
+Parameters
+Try it out
+Name	Description
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "abbreviation": "string",
+    "address": "string",
+    "phone": "string",
+    "email": "user@example.com",
+    "logo_url": "string",
+    "subscription_plan": "free",
+    "id": 0,
+    "created_at": "2025-05-20T12:12:15.800Z",
+    "updated_at": "2025-05-20T12:12:15.800Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/schools/{school_id}
+Get School
+
+
+Get a specific school by ID.
+
+Parameters
+Try it out
+Name	Description
+school_id *
+integer
+(path)
+school_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "abbreviation": "string",
+  "address": "string",
+  "phone": "string",
+  "email": "user@example.com",
+  "logo_url": "string",
+  "subscription_plan": "free",
+  "id": 0,
+  "created_at": "2025-05-20T12:12:15.816Z",
+  "updated_at": "2025-05-20T12:12:15.816Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/schools/{school_id}
+Update School
+
+
+
+POST
+/api/departments
+Create Department
+
+
+Create a new department.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "school_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:15.839Z",
+  "updated_at": "2025-05-20T12:12:15.839Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/departments
+Get Departments
+
+
+Get all departments, optionally filtered by school_id.
+
+Parameters
+Try it out
+Name	Description
+school_id
+integer | (integer | null)
+(query)
+school_id
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "description": "string",
+    "id": 0,
+    "school_id": 0,
+    "created_at": "2025-05-20T12:12:15.866Z",
+    "updated_at": "2025-05-20T12:12:15.866Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/departments/{department_id}
+Get Department
+
+
+Get a specific department by ID.
+
+Parameters
+Try it out
+Name	Description
+department_id *
+integer
+(path)
+department_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:15.884Z",
+  "updated_at": "2025-05-20T12:12:15.884Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/departments/{department_id}
+Update Department
+
+
+Update a department (admin only).
+
+Parameters
+Try it out
+Name	Description
+department_id *
+integer
+(path)
+department_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:15.914Z",
+  "updated_at": "2025-05-20T12:12:15.914Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/classes
+Create Class
+
+
+Create a new class.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "department_id": 0,
+  "school_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "department_id": 0,
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:15.935Z",
+  "updated_at": "2025-05-20T12:12:15.935Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/classes
+Get Classes
+
+
+Get all classes, optionally filtered by school_id and/or department_id.
+
+Parameters
+Try it out
+Name	Description
+school_id
+integer | (integer | null)
+(query)
+school_id
+department_id
+integer | (integer | null)
+(query)
+department_id
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "department_id": 0,
+    "id": 0,
+    "school_id": 0,
+    "created_at": "2025-05-20T12:12:15.962Z",
+    "updated_at": "2025-05-20T12:12:15.962Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/classes/{class_id}
+Get Class
+
+
+Get a specific class by ID.
+
+Parameters
+Try it out
+Name	Description
+class_id *
+integer
+(path)
+class_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "department_id": 0,
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:15.976Z",
+  "updated_at": "2025-05-20T12:12:15.976Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/classes/{class_id}
+Update Class
+
+
+Update a class (admin only).
+
+Parameters
+Try it out
+Name	Description
+class_id *
+integer
+(path)
+class_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "department_id": 0
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "department_id": 0,
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.000Z",
+  "updated_at": "2025-05-20T12:12:16.000Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/subjects
+Create Subject
+
+
+Create a new subject.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "department_id": 0,
+  "school_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "department_id": 0,
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.020Z",
+  "updated_at": "2025-05-20T12:12:16.020Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/subjects
+Get Subjects
+
+
+Get all subjects, optionally filtered by school_id and/or department_id.
+
+Parameters
+Try it out
+Name	Description
+school_id
+integer | (integer | null)
+(query)
+school_id
+department_id
+integer | (integer | null)
+(query)
+department_id
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "department_id": 0,
+    "id": 0,
+    "school_id": 0,
+    "created_at": "2025-05-20T12:12:16.048Z",
+    "updated_at": "2025-05-20T12:12:16.048Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/subjects/{subject_id}
+Get Subject
+
+
+Get a specific subject by ID.
+
+Parameters
+Try it out
+Name	Description
+subject_id *
+integer
+(path)
+subject_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "department_id": 0,
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.064Z",
+  "updated_at": "2025-05-20T12:12:16.064Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/subjects/{subject_id}
+Update Subject
+
+
+Update a subject (admin only).
+
+Parameters
+Try it out
+Name	Description
+subject_id *
+integer
+(path)
+subject_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "department_id": 0
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "department_id": 0,
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.087Z",
+  "updated_at": "2025-05-20T12:12:16.087Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/authentic-locations
+Create Authentic Location
+
+
+Create a new authentic location for GPS verification.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "latitude": 0,
+  "longitude": 0,
+  "radius_meters": 100,
+  "active": true,
+  "school_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "latitude": 0,
+  "longitude": 0,
+  "radius_meters": 100,
+  "active": true,
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.110Z",
+  "updated_at": "2025-05-20T12:12:16.110Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/authentic-locations
+Get Authentic Locations
+
+
+Get all authentic locations, optionally filtered by school_id and active status.
+
+Parameters
+Try it out
+Name	Description
+school_id
+integer | (integer | null)
+(query)
+school_id
+active_only
+boolean
+(query)
+Default value : true
+
+
+true
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "latitude": 0,
+    "longitude": 0,
+    "radius_meters": 100,
+    "active": true,
+    "id": 0,
+    "school_id": 0,
+    "created_at": "2025-05-20T12:12:16.137Z",
+    "updated_at": "2025-05-20T12:12:16.137Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/authentic-locations/{location_id}
+Get Authentic Location
+
+
+Get a specific authentic location by ID.
+
+Parameters
+Try it out
+Name	Description
+location_id *
+integer
+(path)
+location_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "latitude": 0,
+  "longitude": 0,
+  "radius_meters": 100,
+  "active": true,
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.152Z",
+  "updated_at": "2025-05-20T12:12:16.152Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/authentic-locations/{location_id}
+Update Authentic Location
+
+
+Update an authentic location (admin only).
+
+Parameters
+Try it out
+Name	Description
+location_id *
+integer
+(path)
+location_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "latitude": 0,
+  "longitude": 0,
+  "radius_meters": 0,
+  "active": true
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "latitude": 0,
+  "longitude": 0,
+  "radius_meters": 100,
+  "active": true,
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.180Z",
+  "updated_at": "2025-05-20T12:12:16.180Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Users
+
+
+GET
+/api/roles
+Get Roles
+
+
+Get all roles.
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "description": "string",
+    "id": 0
+  }
+]
+No links
+
+POST
+/api/roles
+Create Role
+
+
+Create a new role (super_admin only).
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string"
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "id": 0
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/roles/{role_id}
+Get Role
+
+
+Get a specific role by ID.
+
+Parameters
+Try it out
+Name	Description
+role_id *
+integer
+(path)
+role_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "id": 0
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/roles/{role_id}
+Update Role
+
+
+Update a role (super_admin only).
+
+Parameters
+Try it out
+Name	Description
+role_id *
+integer
+(path)
+role_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "id": 0
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/permissions
+Get Permissions
+
+
+Get all permissions.
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "description": "string",
+    "id": 0
+  }
+]
+No links
+
+POST
+/api/permissions
+Create Permission
+
+
+Create a new permission (super_admin only).
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string"
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "id": 0
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/roles/{role_id}/permissions/{permission_id}
+Assign Permission To Role
+
+
+Assign a permission to a role (super_admin only).
+
+Parameters
+Try it out
+Name	Description
+role_id *
+integer
+(path)
+role_id
+permission_id *
+integer
+(path)
+permission_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+"string"
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+DELETE
+/api/roles/{role_id}/permissions/{permission_id}
+Remove Permission From Role
+
+
+Remove a permission from a role (super_admin only).
+
+Parameters
+Try it out
+Name	Description
+role_id *
+integer
+(path)
+role_id
+permission_id *
+integer
+(path)
+permission_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+"string"
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/users
+Get Users
+
+
+Get all users, with optional filtering by school, role, and search term.
+
+Parameters
+Try it out
+Name	Description
+school_id
+integer | (integer | null)
+(query)
+school_id
+role_id
+integer | (integer | null)
+(query)
+role_id
+search
+string | (string | null)
+(query)
+search
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "full_name": "string",
+    "email": "user@example.com",
+    "phone": "string",
+    "profile_photo_url": "string",
+    "id": 0,
+    "school_id": 0,
+    "role_id": 0,
+    "is_email_verified": true,
+    "created_at": "2025-05-20T12:12:16.358Z",
+    "updated_at": "2025-05-20T12:12:16.358Z",
+    "role": {
+      "name": "string",
+      "description": "string",
+      "id": 0
+    }
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/users/{user_id}
+Get User
+
+
+Get a specific user by ID.
+
+Parameters
+Try it out
+Name	Description
+user_id *
+integer
+(path)
+user_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "full_name": "string",
+  "email": "user@example.com",
+  "phone": "string",
+  "profile_photo_url": "string",
+  "id": 0,
+  "school_id": 0,
+  "role_id": 0,
+  "is_email_verified": true,
+  "created_at": "2025-05-20T12:12:16.386Z",
+  "updated_at": "2025-05-20T12:12:16.386Z",
+  "role": {
+    "name": "string",
+    "description": "string",
+    "id": 0
+  }
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/users/{user_id}
+Update User
+
+
+Update a user.
+
+Parameters
+Try it out
+Name	Description
+user_id *
+integer
+(path)
+user_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "full_name": "string",
+  "email": "user@example.com",
+  "phone": "string",
+  "profile_photo_url": "string",
+  "role_id": 0
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "full_name": "string",
+  "email": "user@example.com",
+  "phone": "string",
+  "profile_photo_url": "string",
+  "id": 0,
+  "school_id": 0,
+  "role_id": 0,
+  "is_email_verified": true,
+  "created_at": "2025-05-20T12:12:16.414Z",
+  "updated_at": "2025-05-20T12:12:16.414Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+DELETE
+/api/users/{user_id}
+Delete User
+
+
+Delete a user (admin only).
+
+Parameters
+Try it out
+Name	Description
+user_id *
+integer
+(path)
+user_id
+Responses
+Code	Description	Links
+204	
+Successful Response
+
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Students
+
+
+POST
+/api/students
+Create Student
+
+
+Create a new student with user account.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+multipart/form-data
+school_id *
+integer
+full_name *
+string
+email *
+string
+date_of_birth *
+string
+gender
+string | (string | null)
+class_id
+integer | (integer | null)
+department_id
+integer | (integer | null)
+session_id
+integer | (integer | null)
+phone
+string | (string | null)
+photo
+string | (string | null)($binary)
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "admission_number": "string",
+  "date_of_birth": "2025-05-20T12:12:16.477Z",
+  "gender": "string",
+  "class_id": 0,
+  "department_id": 0,
+  "session_id": 0,
+  "photo_url": "string",
+  "id": 0,
+  "user_id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.477Z",
+  "updated_at": "2025-05-20T12:12:16.477Z",
+  "user": {
+    "full_name": "string",
+    "email": "user@example.com",
+    "phone": "string",
+    "profile_photo_url": "string",
+    "id": 0,
+    "school_id": 0,
+    "role_id": 0,
+    "is_email_verified": true,
+    "created_at": "2025-05-20T12:12:16.477Z",
+    "updated_at": "2025-05-20T12:12:16.477Z"
+  }
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/students
+Get Students
+
+
+Get all students, with optional filtering.
+
+Parameters
+Try it out
+Name	Description
+school_id
+integer | (integer | null)
+(query)
+school_id
+class_id
+integer | (integer | null)
+(query)
+class_id
+department_id
+integer | (integer | null)
+(query)
+department_id
+session_id
+integer | (integer | null)
+(query)
+session_id
+search
+string | (string | null)
+(query)
+search
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "admission_number": "string",
+    "date_of_birth": "2025-05-20T12:12:16.517Z",
+    "gender": "string",
+    "class_id": 0,
+    "department_id": 0,
+    "session_id": 0,
+    "photo_url": "string",
+    "id": 0,
+    "user_id": 0,
+    "school_id": 0,
+    "created_at": "2025-05-20T12:12:16.517Z",
+    "updated_at": "2025-05-20T12:12:16.517Z",
+    "user": {
+      "full_name": "string",
+      "email": "user@example.com",
+      "phone": "string",
+      "profile_photo_url": "string",
+      "id": 0,
+      "school_id": 0,
+      "role_id": 0,
+      "is_email_verified": true,
+      "created_at": "2025-05-20T12:12:16.517Z",
+      "updated_at": "2025-05-20T12:12:16.517Z"
+    }
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/students/{student_id}
+Get Student
+
+
+Get a specific student by ID.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "admission_number": "string",
+  "date_of_birth": "2025-05-20T12:12:16.535Z",
+  "gender": "string",
+  "class_id": 0,
+  "department_id": 0,
+  "session_id": 0,
+  "photo_url": "string",
+  "id": 0,
+  "user_id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.535Z",
+  "updated_at": "2025-05-20T12:12:16.535Z",
+  "user": {
+    "full_name": "string",
+    "email": "user@example.com",
+    "phone": "string",
+    "profile_photo_url": "string",
+    "id": 0,
+    "school_id": 0,
+    "role_id": 0,
+    "is_email_verified": true,
+    "created_at": "2025-05-20T12:12:16.535Z",
+    "updated_at": "2025-05-20T12:12:16.535Z"
+  }
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/students/{student_id}
+Update Student
+
+
+Update a student.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "admission_number": "string",
+  "date_of_birth": "2025-05-20T12:12:16.562Z",
+  "gender": "string",
+  "class_id": 0,
+  "department_id": 0,
+  "session_id": 0,
+  "photo_url": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "admission_number": "string",
+  "date_of_birth": "2025-05-20T12:12:16.566Z",
+  "gender": "string",
+  "class_id": 0,
+  "department_id": 0,
+  "session_id": 0,
+  "photo_url": "string",
+  "id": 0,
+  "user_id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.566Z",
+  "updated_at": "2025-05-20T12:12:16.566Z",
+  "user": {
+    "full_name": "string",
+    "email": "user@example.com",
+    "phone": "string",
+    "profile_photo_url": "string",
+    "id": 0,
+    "school_id": 0,
+    "role_id": 0,
+    "is_email_verified": true,
+    "created_at": "2025-05-20T12:12:16.566Z",
+    "updated_at": "2025-05-20T12:12:16.566Z"
+  }
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/students/{student_id}/parents/{parent_user_id}
+Link Parent To Student
+
+
+Link a parent to a student.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+parent_user_id *
+integer
+(path)
+parent_user_id
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+"string"
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+DELETE
+/api/students/{student_id}/parents/{parent_user_id}
+Unlink Parent From Student
+
+
+Remove link between a parent and a student.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+parent_user_id *
+integer
+(path)
+parent_user_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+"string"
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/students/{student_id}/parents
+Get Student Parents
+
+
+Get all parents linked to a student.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {}
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Teachers
+
+
+POST
+/api/teachers
+Create Teacher
+
+
+Create a new teacher account.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+multipart/form-data
+school_id *
+integer
+full_name *
+string
+email *
+string
+phone
+string | (string | null)
+department_id
+integer | (integer | null)
+password *
+string
+profile_photo
+string | (string | null)($binary)
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "full_name": "string",
+  "email": "user@example.com",
+  "phone": "string",
+  "profile_photo_url": "string",
+  "id": 0,
+  "school_id": 0,
+  "role_id": 0,
+  "is_email_verified": true,
+  "created_at": "2025-05-20T12:12:16.661Z",
+  "updated_at": "2025-05-20T12:12:16.661Z",
+  "role": {
+    "name": "string",
+    "description": "string",
+    "id": 0
+  }
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/teachers
+Get Teachers
+
+
+Get all teachers, with optional filtering.
+
+Parameters
+Try it out
+Name	Description
+school_id
+integer | (integer | null)
+(query)
+school_id
+department_id
+integer | (integer | null)
+(query)
+department_id
+search
+string | (string | null)
+(query)
+search
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "full_name": "string",
+    "email": "user@example.com",
+    "phone": "string",
+    "profile_photo_url": "string",
+    "id": 0,
+    "school_id": 0,
+    "role_id": 0,
+    "is_email_verified": true,
+    "created_at": "2025-05-20T12:12:16.694Z",
+    "updated_at": "2025-05-20T12:12:16.694Z",
+    "role": {
+      "name": "string",
+      "description": "string",
+      "id": 0
+    }
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/teachers/{teacher_id}
+Get Teacher
+
+
+Get a specific teacher by ID.
+
+Parameters
+Try it out
+Name	Description
+teacher_id *
+integer
+(path)
+teacher_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "full_name": "string",
+  "email": "user@example.com",
+  "phone": "string",
+  "profile_photo_url": "string",
+  "id": 0,
+  "school_id": 0,
+  "role_id": 0,
+  "is_email_verified": true,
+  "created_at": "2025-05-20T12:12:16.710Z",
+  "updated_at": "2025-05-20T12:12:16.710Z",
+  "role": {
+    "name": "string",
+    "description": "string",
+    "id": 0
+  }
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/teachers/assign
+Assign Teacher To Subject Class
+
+
+Assign a teacher to teach a subject in a class.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "teacher_user_id": 0,
+  "subject_id": 0,
+  "class_id": 0
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "teacher_user_id": 0,
+  "subject_id": 0,
+  "class_id": 0
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+DELETE
+/api/teachers/assignments/{teacher_id}/{subject_id}/{class_id}
+Remove Teacher Assignment
+
+
+Remove a teacher's assignment to teach a subject in a class.
+
+Parameters
+Try it out
+Name	Description
+teacher_id *
+integer
+(path)
+teacher_id
+subject_id *
+integer
+(path)
+subject_id
+class_id *
+integer
+(path)
+class_id
+Responses
+Code	Description	Links
+204	
+Successful Response
+
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/teachers/{teacher_id}/assignments
+Get Teacher Assignments
+
+
+Get all subject-class assignments for a teacher.
+
+Parameters
+Try it out
+Name	Description
+teacher_id *
+integer
+(path)
+teacher_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {}
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Attendance
+
+
+POST
+/api/attendance/verify-location
+Verify Attendance Location
+
+
+Verify if a location is within the authentic zones of a school.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "latitude": 0,
+  "longitude": 0,
+  "school_id": 0
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "is_valid": true,
+  "distance": 0,
+  "location_name": "string",
+  "message": "string"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/attendance
+Create Attendance Record
+
+
+Create a new attendance record for a student.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "date": "2025-05-20",
+  "status": "Present",
+  "latitude": 0,
+  "longitude": 0,
+  "student_id": 0,
+  "class_id": 0,
+  "marked_by_user_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "date": "2025-05-20",
+  "status": "Present",
+  "latitude": 0,
+  "longitude": 0,
+  "id": 0,
+  "student_id": 0,
+  "class_id": 0,
+  "marked_by_user_id": 0,
+  "flagged": true,
+  "flagged_reason": "string",
+  "created_at": "2025-05-20T12:12:16.809Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/attendance
+Get Attendance Records
+
+
+Get attendance records with optional filtering.
+
+Parameters
+Try it out
+Name	Description
+student_id
+integer | (integer | null)
+(query)
+student_id
+class_id
+integer | (integer | null)
+(query)
+class_id
+start_date
+string | (string | null)($date)
+(query)
+start_date
+end_date
+string | (string | null)($date)
+(query)
+end_date
+status
+string | (string | null)
+(query)
+status
+flagged
+boolean | (boolean | null)
+(query)
+
+--
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "date": "2025-05-20",
+    "status": "Present",
+    "latitude": 0,
+    "longitude": 0,
+    "id": 0,
+    "student_id": 0,
+    "class_id": 0,
+    "marked_by_user_id": 0,
+    "flagged": true,
+    "flagged_reason": "string",
+    "created_at": "2025-05-20T12:12:16.852Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/attendance/bulk
+Create Bulk Attendance
+
+
+Create attendance records for multiple students at once.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "class_id": 0,
+  "date": "2025-05-20",
+  "marked_by_user_id": 0,
+  "latitude": 0,
+  "longitude": 0,
+  "records": [
+    {
+      "student_id": 0,
+      "status": "Present"
+    }
+  ]
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "date": "2025-05-20",
+    "status": "Present",
+    "latitude": 0,
+    "longitude": 0,
+    "id": 0,
+    "student_id": 0,
+    "class_id": 0,
+    "marked_by_user_id": 0,
+    "flagged": true,
+    "flagged_reason": "string",
+    "created_at": "2025-05-20T12:12:16.876Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/attendance/{record_id}
+Get Attendance Record
+
+
+Get a specific attendance record by ID.
+
+Parameters
+Try it out
+Name	Description
+record_id *
+integer
+(path)
+record_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "date": "2025-05-20",
+  "status": "Present",
+  "latitude": 0,
+  "longitude": 0,
+  "id": 0,
+  "student_id": 0,
+  "class_id": 0,
+  "marked_by_user_id": 0,
+  "flagged": true,
+  "flagged_reason": "string",
+  "created_at": "2025-05-20T12:12:16.892Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/attendance/{record_id}
+Update Attendance Record
+
+
+Update an attendance record.
+
+Parameters
+Try it out
+Name	Description
+record_id *
+integer
+(path)
+record_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Present",
+  "flagged": true,
+  "flagged_reason": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "date": "2025-05-20",
+  "status": "Present",
+  "latitude": 0,
+  "longitude": 0,
+  "id": 0,
+  "student_id": 0,
+  "class_id": 0,
+  "marked_by_user_id": 0,
+  "flagged": true,
+  "flagged_reason": "string",
+  "created_at": "2025-05-20T12:12:16.918Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/attendance/statistics/student/{student_id}
+Get Student Attendance Statistics
+
+
+Get attendance statistics for a specific student.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+start_date
+string | (string | null)($date)
+(query)
+start_date
+end_date
+string | (string | null)($date)
+(query)
+end_date
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "total_days": 0,
+  "present_days": 0,
+  "absent_days": 0,
+  "late_days": 0,
+  "excused_days": 0,
+  "attendance_percentage": 0
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/attendance/statistics/class/{class_id}
+Get Class Attendance Statistics
+
+
+Get attendance statistics for a class.
+
+Parameters
+Try it out
+Name	Description
+class_id *
+integer
+(path)
+class_id
+date
+string | (string | null)($date)
+(query)
+date
+start_date
+string | (string | null)($date)
+(query)
+start_date
+end_date
+string | (string | null)($date)
+(query)
+end_date
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Academics
+
+
+POST
+/api/academic-sessions
+Create Academic Session
+
+
+Create a new academic session.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "start_date": "2025-05-20T12:12:16.985Z",
+  "end_date": "2025-05-20T12:12:16.985Z",
+  "school_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "start_date": "2025-05-20T12:12:16.992Z",
+  "end_date": "2025-05-20T12:12:16.992Z",
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:16.992Z",
+  "updated_at": "2025-05-20T12:12:16.992Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/academic-sessions
+Get Academic Sessions
+
+
+Get all academic sessions, optionally filtered by school.
+
+Parameters
+Try it out
+Name	Description
+school_id
+integer | (integer | null)
+(query)
+school_id
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "start_date": "2025-05-20T12:12:17.028Z",
+    "end_date": "2025-05-20T12:12:17.028Z",
+    "id": 0,
+    "school_id": 0,
+    "created_at": "2025-05-20T12:12:17.028Z",
+    "updated_at": "2025-05-20T12:12:17.028Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/academic-sessions/{session_id}
+Get Academic Session
+
+
+Get a specific academic session by ID.
+
+Parameters
+Try it out
+Name	Description
+session_id *
+integer
+(path)
+session_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "start_date": "2025-05-20T12:12:17.044Z",
+  "end_date": "2025-05-20T12:12:17.044Z",
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:17.044Z",
+  "updated_at": "2025-05-20T12:12:17.044Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/academic-sessions/{session_id}
+Update Academic Session
+
+
+Update an academic session.
+
+Parameters
+Try it out
+Name	Description
+session_id *
+integer
+(path)
+session_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "start_date": "2025-05-20T12:12:17.065Z",
+  "end_date": "2025-05-20T12:12:17.065Z"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "start_date": "2025-05-20T12:12:17.069Z",
+  "end_date": "2025-05-20T12:12:17.069Z",
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:17.069Z",
+  "updated_at": "2025-05-20T12:12:17.069Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/terms
+Create Term
+
+
+Create a new term within an academic session.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "start_date": "2025-05-20T12:12:17.089Z",
+  "end_date": "2025-05-20T12:12:17.089Z",
+  "session_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "start_date": "2025-05-20T12:12:17.096Z",
+  "end_date": "2025-05-20T12:12:17.096Z",
+  "id": 0,
+  "session_id": 0,
+  "created_at": "2025-05-20T12:12:17.096Z",
+  "updated_at": "2025-05-20T12:12:17.096Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/terms
+Get Terms
+
+
+Get all terms, optionally filtered by academic session.
+
+Parameters
+Try it out
+Name	Description
+session_id
+integer | (integer | null)
+(query)
+session_id
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "start_date": "2025-05-20T12:12:17.124Z",
+    "end_date": "2025-05-20T12:12:17.124Z",
+    "id": 0,
+    "session_id": 0,
+    "created_at": "2025-05-20T12:12:17.124Z",
+    "updated_at": "2025-05-20T12:12:17.124Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/terms/{term_id}
+Get Term
+
+
+Get a specific term by ID.
+
+Parameters
+Try it out
+Name	Description
+term_id *
+integer
+(path)
+term_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "start_date": "2025-05-20T12:12:17.140Z",
+  "end_date": "2025-05-20T12:12:17.140Z",
+  "id": 0,
+  "session_id": 0,
+  "created_at": "2025-05-20T12:12:17.140Z",
+  "updated_at": "2025-05-20T12:12:17.140Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/terms/{term_id}
+Update Term
+
+
+Update a term.
+
+Parameters
+Try it out
+Name	Description
+term_id *
+integer
+(path)
+term_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "start_date": "2025-05-20T12:12:17.162Z",
+  "end_date": "2025-05-20T12:12:17.162Z"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "start_date": "2025-05-20T12:12:17.165Z",
+  "end_date": "2025-05-20T12:12:17.165Z",
+  "id": 0,
+  "session_id": 0,
+  "created_at": "2025-05-20T12:12:17.165Z",
+  "updated_at": "2025-05-20T12:12:17.165Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/assessments
+Create Assessment
+
+
+Create a new assessment for a term.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "max_score": 0,
+  "school_id": 0,
+  "term_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "max_score": "string",
+  "id": 0,
+  "school_id": 0,
+  "term_id": 0,
+  "created_at": "2025-05-20T12:12:17.186Z",
+  "updated_at": "2025-05-20T12:12:17.186Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/assessments
+Get Assessments
+
+
+Get all assessments, optionally filtered by school and/or term.
+
+Parameters
+Try it out
+Name	Description
+school_id
+integer | (integer | null)
+(query)
+school_id
+term_id
+integer | (integer | null)
+(query)
+term_id
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "max_score": "string",
+    "id": 0,
+    "school_id": 0,
+    "term_id": 0,
+    "created_at": "2025-05-20T12:12:17.215Z",
+    "updated_at": "2025-05-20T12:12:17.215Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/assessments/{assessment_id}
+Get Assessment
+
+
+Get a specific assessment by ID.
+
+Parameters
+Try it out
+Name	Description
+assessment_id *
+integer
+(path)
+assessment_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "max_score": "string",
+  "id": 0,
+  "school_id": 0,
+  "term_id": 0,
+  "created_at": "2025-05-20T12:12:17.231Z",
+  "updated_at": "2025-05-20T12:12:17.231Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/assessments/{assessment_id}
+Update Assessment
+
+
+Update an assessment.
+
+Parameters
+Try it out
+Name	Description
+assessment_id *
+integer
+(path)
+assessment_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "max_score": 0
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "max_score": "string",
+  "id": 0,
+  "school_id": 0,
+  "term_id": 0,
+  "created_at": "2025-05-20T12:12:17.259Z",
+  "updated_at": "2025-05-20T12:12:17.259Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/scores
+Create Student Score
+
+
+
+GET
+/api/scores
+Get Student Scores
+
+
+Get student assessment scores with optional filtering.
+
+Parameters
+Try it out
+Name	Description
+student_id
+integer | (integer | null)
+(query)
+student_id
+assessment_id
+integer | (integer | null)
+(query)
+assessment_id
+subject_id
+integer | (integer | null)
+(query)
+subject_id
+class_id
+integer | (integer | null)
+(query)
+class_id
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "score": "string",
+    "id": 0,
+    "student_id": 0,
+    "assessment_id": 0,
+    "subject_id": 0,
+    "created_at": "2025-05-20T12:12:17.296Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/scores/batch
+Create Batch Scores
+
+
+Record multiple scores in a batch operation.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+[
+  {
+    "score": 0,
+    "student_id": 0,
+    "assessment_id": 0,
+    "subject_id": 0
+  }
+]
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "score": "string",
+    "id": 0,
+    "student_id": 0,
+    "assessment_id": 0,
+    "subject_id": 0,
+    "created_at": "2025-05-20T12:12:17.317Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/scores/{score_id}
+Update Student Score
+
+
+
+GET
+/api/reports/student/{student_id}/term/{term_id}
+Get Student Report Card
+
+
+Generate a report card for a student for a specific term.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+term_id *
+integer
+(path)
+term_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "student_id": 0,
+  "student_name": "string",
+  "class_id": 0,
+  "class_name": "string",
+  "term_id": 0,
+  "term_name": "string",
+  "session_id": 0,
+  "session_name": "string",
+  "subjects": [
+    {
+      "subject_id": 0,
+      "subject_name": "string",
+      "scores": [
+        {}
+      ],
+      "total": 0,
+      "average": 0,
+      "grade": "string"
+    }
+  ],
+  "overall_average": 0,
+  "overall_grade": "string",
+  "position": 0,
+  "teacher_comment": "string",
+  "principal_comment": "string"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Finance
+
+
+POST
+/api/fee-types
+Create Fee Type
+
+
+Create a new fee type.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "amount": 1,
+  "school_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "amount": "string",
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:17.359Z",
+  "updated_at": "2025-05-20T12:12:17.359Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/fee-types
+Get Fee Types
+
+
+Get all fee types, optionally filtered by school.
+
+Parameters
+Try it out
+Name	Description
+school_id
+integer | (integer | null)
+(query)
+school_id
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "name": "string",
+    "description": "string",
+    "amount": "string",
+    "id": 0,
+    "school_id": 0,
+    "created_at": "2025-05-20T12:12:17.382Z",
+    "updated_at": "2025-05-20T12:12:17.382Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/fee-types/{fee_type_id}
+Get Fee Type
+
+
+Get a specific fee type by ID.
+
+Parameters
+Try it out
+Name	Description
+fee_type_id *
+integer
+(path)
+fee_type_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "amount": "string",
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:17.398Z",
+  "updated_at": "2025-05-20T12:12:17.398Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/fee-types/{fee_type_id}
+Update Fee Type
+
+
+Update a fee type.
+
+Parameters
+Try it out
+Name	Description
+fee_type_id *
+integer
+(path)
+fee_type_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "amount": 1
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "name": "string",
+  "description": "string",
+  "amount": "string",
+  "id": 0,
+  "school_id": 0,
+  "created_at": "2025-05-20T12:12:17.423Z",
+  "updated_at": "2025-05-20T12:12:17.423Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/student-fees
+Create Student Fee
+
+
+Assign a fee to a student.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "amount_due": 1,
+  "amount_paid": 0,
+  "status": "pending",
+  "due_date": "2025-05-20",
+  "student_id": 0,
+  "fee_type_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "amount_due": "string",
+  "amount_paid": "0",
+  "status": "pending",
+  "due_date": "2025-05-20",
+  "id": 0,
+  "student_id": 0,
+  "fee_type_id": 0,
+  "created_at": "2025-05-20T12:12:17.444Z",
+  "updated_at": "2025-05-20T12:12:17.444Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/student-fees
+Get Student Fees
+
+
+Get student fees with optional filtering.
+
+Parameters
+Try it out
+Name	Description
+student_id
+integer | (integer | null)
+(query)
+student_id
+fee_type_id
+integer | (integer | null)
+(query)
+fee_type_id
+status
+string | (string | null)
+(query)
+status
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "amount_due": "string",
+    "amount_paid": "0",
+    "status": "pending",
+    "due_date": "2025-05-20",
+    "id": 0,
+    "student_id": 0,
+    "fee_type_id": 0,
+    "created_at": "2025-05-20T12:12:17.472Z",
+    "updated_at": "2025-05-20T12:12:17.472Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/student-fees/bulk
+Create Bulk Student Fees
+
+
+Assign a fee to multiple students at once.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "student_ids": [
+    0
+  ],
+  "fee_type_id": 0,
+  "amount_due": 0,
+  "due_date": "2025-05-20"
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "amount_due": "string",
+    "amount_paid": "0",
+    "status": "pending",
+    "due_date": "2025-05-20",
+    "id": 0,
+    "student_id": 0,
+    "fee_type_id": 0,
+    "created_at": "2025-05-20T12:12:17.491Z",
+    "updated_at": "2025-05-20T12:12:17.491Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/student-fees/{fee_id}
+Get Student Fee
+
+
+Get a specific student fee by ID.
+
+Parameters
+Try it out
+Name	Description
+fee_id *
+integer
+(path)
+fee_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "amount_due": "string",
+  "amount_paid": "0",
+  "status": "pending",
+  "due_date": "2025-05-20",
+  "id": 0,
+  "student_id": 0,
+  "fee_type_id": 0,
+  "created_at": "2025-05-20T12:12:17.504Z",
+  "updated_at": "2025-05-20T12:12:17.504Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/student-fees/{fee_id}
+Update Student Fee
+
+
+
+GET
+/api/student-fees/summary/{student_id}
+Get Fee Summary
+
+
+Get a summary of fees for a student.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "total_due": 0,
+  "total_paid": 0,
+  "total_balance": 0,
+  "payment_status": "pending"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/payments
+Create Payment
+
+
+Record a manual payment for a student fee.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "amount": 1,
+  "payment_method": "paystack",
+  "payment_reference": "string",
+  "student_fee_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "amount": "string",
+  "payment_method": "paystack",
+  "payment_reference": "string",
+  "id": 0,
+  "student_fee_id": 0,
+  "payment_date": "2025-05-20T12:12:17.536Z",
+  "created_at": "2025-05-20T12:12:17.536Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/payments
+Get Payments
+
+
+Get payments with optional filtering.
+
+Parameters
+Try it out
+Name	Description
+student_fee_id
+integer | (integer | null)
+(query)
+student_fee_id
+student_id
+integer | (integer | null)
+(query)
+student_id
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "amount": "string",
+    "payment_method": "paystack",
+    "payment_reference": "string",
+    "id": 0,
+    "student_fee_id": 0,
+    "payment_date": "2025-05-20T12:12:17.560Z",
+    "created_at": "2025-05-20T12:12:17.560Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/payments/paystack/initialize
+Initialize Paystack Payment
+
+
+Initialize a payment transaction with Paystack.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "student_fee_id": 0,
+  "amount": 1,
+  "email": "string",
+  "callback_url": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "authorization_url": "string",
+  "access_code": "string",
+  "reference": "string"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/payments/paystack/verify
+Verify Paystack Payment
+
+
+Verify a Paystack payment and update the student fee accordingly.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "reference": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "is_successful": true,
+  "amount": 0,
+  "transaction_date": "2025-05-20T12:12:17.597Z",
+  "message": "string"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Communication
+
+
+POST
+/api/messages
+Create Message
+
+
+Send a new message.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "content": "string",
+  "attachment_url": "string",
+  "is_group_message": false,
+  "sender_user_id": 0,
+  "receiver_user_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "content": "string",
+  "attachment_url": "string",
+  "is_group_message": false,
+  "id": 0,
+  "sender_user_id": 0,
+  "receiver_user_id": 0,
+  "created_at": "2025-05-20T12:12:17.616Z",
+  "read_at": "2025-05-20T12:12:17.616Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/messages
+Get Messages
+
+
+Get messages for the current user, optionally filtered by conversation partner.
+
+Parameters
+Try it out
+Name	Description
+with_user_id
+integer | (integer | null)
+(query)
+User ID to filter conversations
+
+with_user_id
+unread_only
+boolean
+(query)
+Filter to only unread messages
+
+Default value : false
+
+
+false
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "content": "string",
+    "attachment_url": "string",
+    "is_group_message": false,
+    "id": 0,
+    "sender_user_id": 0,
+    "receiver_user_id": 0,
+    "created_at": "2025-05-20T12:12:17.653Z",
+    "read_at": "2025-05-20T12:12:17.653Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/messages/{message_id}/read
+Mark Message As Read
+
+
+Mark a message as read.
+
+Parameters
+Try it out
+Name	Description
+message_id *
+integer
+(path)
+message_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "content": "string",
+  "attachment_url": "string",
+  "is_group_message": false,
+  "id": 0,
+  "sender_user_id": 0,
+  "receiver_user_id": 0,
+  "created_at": "2025-05-20T12:12:17.669Z",
+  "read_at": "2025-05-20T12:12:17.669Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/messages/unread-count
+Get Unread Message Count
+
+
+Get the count of unread messages for the current user.
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{}
+No links
+
+POST
+/api/behavior-reports
+Create Behavior Report
+
+
+Create a new behavior report for a student.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "behavior_type": "string",
+  "description": "string",
+  "action_taken": "string",
+  "student_id": 0,
+  "reported_by_user_id": 0
+}
+Responses
+Code	Description	Links
+201	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "behavior_type": "string",
+  "description": "string",
+  "action_taken": "string",
+  "id": 0,
+  "student_id": 0,
+  "reported_by_user_id": 0,
+  "report_date": "2025-05-20T12:12:17.694Z",
+  "created_at": "2025-05-20T12:12:17.694Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/behavior-reports
+Get Behavior Reports
+
+
+Get behavior reports with optional filtering.
+
+Parameters
+Try it out
+Name	Description
+student_id
+integer | (integer | null)
+(query)
+student_id
+reported_by_user_id
+integer | (integer | null)
+(query)
+reported_by_user_id
+behavior_type
+string | (string | null)
+(query)
+behavior_type
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "behavior_type": "string",
+    "description": "string",
+    "action_taken": "string",
+    "id": 0,
+    "student_id": 0,
+    "reported_by_user_id": 0,
+    "report_date": "2025-05-20T12:12:17.722Z",
+    "created_at": "2025-05-20T12:12:17.722Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/behavior-reports/{report_id}
+Get Behavior Report
+
+
+
+PUT
+/api/behavior-reports/{report_id}
+Update Behavior Report
+
+
+Update a behavior report.
+
+Parameters
+Try it out
+Name	Description
+report_id *
+integer
+(path)
+report_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "behavior_type": "string",
+  "description": "string",
+  "action_taken": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "behavior_type": "string",
+  "description": "string",
+  "action_taken": "string",
+  "id": 0,
+  "student_id": 0,
+  "reported_by_user_id": 0,
+  "report_date": "2025-05-20T12:12:17.748Z",
+  "created_at": "2025-05-20T12:12:17.748Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/audit-logs
+Get Audit Logs
+
+
+Get audit logs with optional filtering (admin only).
+
+Parameters
+Try it out
+Name	Description
+user_id
+integer | (integer | null)
+(query)
+user_id
+entity_type
+string | (string | null)
+(query)
+entity_type
+entity_id
+integer | (integer | null)
+(query)
+entity_id
+action
+string | (string | null)
+(query)
+action
+start_date
+string | (string | null)($date-time)
+(query)
+start_date
+end_date
+string | (string | null)($date-time)
+(query)
+end_date
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "action": "string",
+    "entity_type": "string",
+    "entity_id": 0,
+    "ip_address": "string",
+    "id": 0,
+    "user_id": 0,
+    "timestamp": "2025-05-20T12:12:17.785Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Parents
+
+
+GET
+/api/parents/{parent_id}/children
+Get Parent Children
+
+
+Get all children linked to a parent.
+
+Parameters
+Try it out
+Name	Description
+parent_id *
+integer
+(path)
+parent_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "children": [
+    {
+      "id": 0,
+      "user_id": 0,
+      "school_id": 0,
+      "admission_number": "string",
+      "date_of_birth": "2025-05-20T12:12:17.799Z",
+      "gender": "string",
+      "class_id": 0,
+      "department_id": 0,
+      "session_id": 0,
+      "photo_url": "string",
+      "created_at": "2025-05-20T12:12:17.799Z",
+      "updated_at": "2025-05-20T12:12:17.799Z"
+    }
+  ]
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/parents/{parent_id}/summary
+Get Parent Children Summary
+
+
+Get a summary of all children linked to a parent, including attendance, fees, and academic performance.
+
+Parameters
+Try it out
+Name	Description
+parent_id *
+integer
+(path)
+parent_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "children": [
+    {
+      "id": 0,
+      "name": "string",
+      "class_name": "string",
+      "attendance_rate": 0,
+      "fee_balance": 0,
+      "average_score": 0
+    }
+  ]
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Custom Fields
+
+
+POST
+/api/students/{student_id}/custom-fields
+Create Student Custom Field
+
+
+Create a new custom field for a student.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "field_key": "string",
+  "field_value": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "field_key": "string",
+  "field_value": "string",
+  "id": 0,
+  "student_id": 0,
+  "created_at": "2025-05-20T12:12:17.834Z",
+  "updated_at": "2025-05-20T12:12:17.834Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/students/{student_id}/custom-fields
+Get Student Custom Fields
+
+
+
+PUT
+/api/students/{student_id}/custom-fields/{field_key}
+Update Student Custom Field
+
+
+Update a custom field for a student.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+field_key *
+string
+(path)
+field_key
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "field_key": "string",
+  "field_value": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "field_key": "string",
+  "field_value": "string",
+  "id": 0,
+  "student_id": 0,
+  "created_at": "2025-05-20T12:12:17.860Z",
+  "updated_at": "2025-05-20T12:12:17.860Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+DELETE
+/api/students/{student_id}/custom-fields/{field_key}
+Delete Student Custom Field
+
+
+Delete a custom field for a student.
+
+Parameters
+Try it out
+Name	Description
+student_id *
+integer
+(path)
+student_id
+field_key *
+string
+(path)
+field_key
+Responses
+Code	Description	Links
+204	
+Successful Response
+
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Notifications
+
+
+POST
+/api/announcements
+Create Announcement
+
+
+Create a new announcement for a school, class, department, or specific user.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "title": "string",
+  "message": "string",
+  "audience_type": "school",
+  "audience_id": 0
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "title": "string",
+  "message": "string",
+  "audience_type": "school",
+  "audience_id": 0,
+  "id": 0,
+  "created_by_user_id": 0,
+  "created_at": "2025-05-20T12:12:17.892Z",
+  "updated_at": "2025-05-20T12:12:17.892Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/announcements
+Get Announcements
+
+
+Get all announcements, optionally filtered by audience type and ID.
+
+Parameters
+Try it out
+Name	Description
+audience_type
+string | (string | null)
+(query)
+Available values : school, class, department, user
+
+
+--
+audience_id
+integer | (integer | null)
+(query)
+audience_id
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "title": "string",
+    "message": "string",
+    "audience_type": "school",
+    "audience_id": 0,
+    "id": 0,
+    "created_by_user_id": 0,
+    "created_at": "2025-05-20T12:12:17.917Z",
+    "updated_at": "2025-05-20T12:12:17.917Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/announcements/{announcement_id}
+Get Announcement
+
+
+Get a specific announcement by ID.
+
+Parameters
+Try it out
+Name	Description
+announcement_id *
+integer
+(path)
+announcement_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "title": "string",
+  "message": "string",
+  "audience_type": "school",
+  "audience_id": 0,
+  "id": 0,
+  "created_by_user_id": 0,
+  "created_at": "2025-05-20T12:12:17.930Z",
+  "updated_at": "2025-05-20T12:12:17.930Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/announcements/{announcement_id}
+Update Announcement
+
+
+Update an announcement.
+
+Parameters
+Try it out
+Name	Description
+announcement_id *
+integer
+(path)
+announcement_id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "title": "string",
+  "message": "string"
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "title": "string",
+  "message": "string",
+  "audience_type": "school",
+  "audience_id": 0,
+  "id": 0,
+  "created_by_user_id": 0,
+  "created_at": "2025-05-20T12:12:17.952Z",
+  "updated_at": "2025-05-20T12:12:17.952Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+DELETE
+/api/announcements/{announcement_id}
+Delete Announcement
+
+
+Delete an announcement.
+
+Parameters
+Try it out
+Name	Description
+announcement_id *
+integer
+(path)
+announcement_id
+Responses
+Code	Description	Links
+204	
+Successful Response
+
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+POST
+/api/notifications
+Create Notification
+
+
+Create a new notification for a user.
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "title": "string",
+  "message": "string",
+  "related_entity_type": "string",
+  "related_entity_id": 0,
+  "user_id": 0
+}
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "title": "string",
+  "message": "string",
+  "related_entity_type": "string",
+  "related_entity_id": 0,
+  "id": 0,
+  "user_id": 0,
+  "is_read": true,
+  "created_at": "2025-05-20T12:12:17.982Z"
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/notifications/user/{user_id}
+Get User Notifications
+
+
+Get notifications for a specific user.
+
+Parameters
+Try it out
+Name	Description
+user_id *
+integer
+(path)
+user_id
+unread_only
+boolean
+(query)
+Default value : false
+
+
+false
+skip
+integer
+(query)
+Default value : 0
+
+0
+limit
+integer
+(query)
+Default value : 100
+
+100
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "title": "string",
+    "message": "string",
+    "related_entity_type": "string",
+    "related_entity_id": 0,
+    "id": 0,
+    "user_id": 0,
+    "is_read": true,
+    "created_at": "2025-05-20T12:12:18.007Z"
+  }
+]
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+
+PUT
+/api/notifications/{notification_id}/mark-read
+Mark Notification As Read
+
+
+
+GET
+/api/notifications/user/{user_id}/count
+Get Notification Count
+
+
+Get the count of total and unread notifications for a user.
+
+Parameters
+Try it out
+Name	Description
+user_id *
+integer
+(path)
+user_id
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+{
+  "total": 0,
+  "unread": 0
+}
+No links
+422	
+Validation Error
+
+Media type
+
+application/json
+Example Value
+Schema
+{
+  "detail": [
+    {
+      "loc": [
+        "string",
+        0
+      ],
+      "msg": "string",
+      "type": "string"
+    }
+  ]
+}
+No links
+Root
+
+
+GET
+/
+Root
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+Successful Response
+
+Media type
+
+application/json
+Controls Accept header.
+Example Value
+Schema
+"string"
+No links

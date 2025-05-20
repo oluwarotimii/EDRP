@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg-info/
+*.egg
+*.env
+*.venv
+.env
+.venv/
+env/
+venv/
+ENV/
+Pipfile.lock
+poetry.lock
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*.bak
+
+# Migrations
+alembic/versions/*.pyc
+alembic/versions/__pycache__/
+alembic/versions/*.py
+!alembic/versions/.gitkeep
+
+# Local config
+.env.*
+config.yaml
+*.local.yaml
+instance/
+*.pem
+
+# Compiled files
+*.so
+
+# Coverage and test artifacts
+htmlcov/
+.coverage
+.cache
+pytest_cache/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Build files
+dist/
+build/
+*.whl
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Docker
+docker-compose.override.yml
+*.pid
+
+# FastAPI static/media (if applicable)
+staticfiles/
+mediafiles/
+uploads/
+
+# Gunicorn/PID
+gunicorn.pid
