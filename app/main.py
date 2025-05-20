@@ -91,4 +91,5 @@ async def root():
 # Run the server
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
+    # Run the server on port 5000 instead of 8000
+    uvicorn.run("app.main:app", host="0.0.0.0", port=5000, reload=True)
