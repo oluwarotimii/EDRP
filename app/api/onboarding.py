@@ -2,7 +2,7 @@ import random
 import string
 from typing import List, Optional
 from datetime import datetime, timedelta
-from fastapi import APIRouter, Depends, HTTPException, status, Path, Query
+from fastapi import APIRouter, Depends, HTTPException, status, Path, Query, Body
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import and_, or_, desc
@@ -214,9 +214,9 @@ async def get_pending_users(
 @router.put("/users/{user_id}/approve", response_model=PendingUserResponse)
 async def approve_or_reject_user(
     user_id: int = Path(..., gt=0),
-    action_data: UserApprovalAction = ...,
     db: AsyncSession = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
+    action_data: UserApprovalAction = Body(...)
 ):
     """
     Approve or reject a pending user.
