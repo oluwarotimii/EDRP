@@ -20,12 +20,18 @@ else:
     # Remove sslmode parameter
     db_url = re.sub(r'\?sslmode=require', '', db_url)
 
-# Create async SQLAlchemy engine with SSL configuration
+# Create async SQLAlchemy engine with SSL configuration and improved connection pooling
 engine = create_async_engine(
     db_url,
     echo=False,
     future=True,
     connect_args={"ssl": True},
+    # Add proper connection pool settings
+    pool_size=5,
+    max_overflow=10,
+    pool_timeout=30,
+    pool_recycle=1800,  # Recycle connections after 30 minutes
+    pool_pre_ping=True  # Check connection is valid before using it
 )
 
 # Create base class for models
