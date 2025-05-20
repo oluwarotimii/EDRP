@@ -103,3 +103,4 @@ class Student(Base):
     assessment_scores = relationship("StudentAssessmentScore", back_populates="student")
     fees = relationship("StudentFee", back_populates="student")
     behavior_reports = relationship("BehaviorReport", back_populates="student")
+    custom_fields = relationship("StudentCustomField", back_populates="student")

@@ -5,3 +5,4 @@ from app.models.academics import AcademicSession, Term, Assessment, StudentAsses
 from app.models.attendance import AttendanceRecord
 from app.models.finance import FeeType, StudentFee, Payment
 from app.models.communication import Message, BehaviorReport, AuditLog
+from app.models.custom_fields import StudentCustomField

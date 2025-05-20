@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 from fastapi.openapi.docs import get_swagger_ui_html
 from fastapi.openapi.utils import get_openapi
 
-from app.api import auth, schools, users, students, teachers, attendance, academics, finance, communication
+from app.api import auth, schools, users, students, teachers, attendance, academics, finance, communication, parents, custom_fields
 from app.database import engine, Base
 from app.middleware.authentication import auth_middleware
 from app.middleware.logging import setup_logging
@@ -65,6 +65,8 @@ app.include_router(attendance.router, prefix="/api", tags=["Attendance"])
 app.include_router(academics.router, prefix="/api", tags=["Academics"])
 app.include_router(finance.router, prefix="/api", tags=["Finance"])
 app.include_router(communication.router, prefix="/api", tags=["Communication"])
+app.include_router(parents.router, prefix="/api", tags=["Parents"])
+app.include_router(custom_fields.router, prefix="/api", tags=["Custom Fields"])
 
 # Custom OpenAPI schema for documentation
 @app.get("/api/docs", include_in_schema=False)
