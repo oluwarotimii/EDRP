@@ -6,3 +6,4 @@ from app.models.attendance import AttendanceRecord
 from app.models.finance import FeeType, StudentFee, Payment
 from app.models.communication import Message, BehaviorReport, AuditLog
 from app.models.custom_fields import StudentCustomField
+from app.models.notifications import Announcement, Notification
